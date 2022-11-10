@@ -1,6 +1,9 @@
 import './style.css'
+import ColorfulRectGraphic from "./graphic/ColorfulRectGraphic";
 
-document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
+const rootElement = document.querySelector<HTMLDivElement>('#app')!;
+
+rootElement.innerHTML = `
   <div>
     <a href="https://vitejs.dev" target="_blank">
       <img src="/vite.svg" class="logo" alt="Vite logo" />
@@ -11,3 +14,8 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
     </p>
   </div>
 `
+
+const canvasElement = document.createElement('canvas');
+rootElement.append(canvasElement)
+
+new ColorfulRectGraphic(canvasElement);
