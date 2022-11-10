@@ -13,6 +13,14 @@ export default class ColorfulShapeGraphic {
     ctx.fillRect(...this.getCenterPosition([150, 100]), 150, 100);
   }
 
+  public drawRedCircle() {
+    const ctx = this.canvas.getContext('2d')!;
+    ctx.fillStyle = 'red';
+    ctx.beginPath();
+    ctx.arc(...this.getCenterPosition([0, 0]), 60, 0, 2 * Math.PI);
+    ctx.fill();
+  }
+
   private getCenterPosition(targetXY: VertexXY): VertexXY {
     const {width, height} = this.canvas;
     const [x, y] = targetXY;
