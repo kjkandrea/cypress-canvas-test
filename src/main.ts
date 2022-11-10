@@ -23,3 +23,4 @@ rootElement.append(canvasElement);
 const colorfulShapeGraphic = new ColorfulShapeGraphic(canvasElement);
 colorfulShapeGraphic.drawGreenRect();
 colorfulShapeGraphic.drawRedCircle();
+colorfulShapeGraphic.drawBlueTriangle();
