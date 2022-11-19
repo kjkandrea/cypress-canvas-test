@@ -21,11 +21,18 @@ const colorfulShapeGraphic = new ColorfulShapeGraphic(canvasElement);
 rootElement.addEventListener('click', ({target}) => {
   if (!isEventButtonElement(target)) return;
   const event = target.dataset.event;
-  console.log(event);
+  switch (event) {
+    case 'draw-green-rect':
+      colorfulShapeGraphic.drawGreenRect();
+      break;
+    case 'draw-red-circle':
+      colorfulShapeGraphic.drawRedCircle();
+      break;
+    case 'draw-blue-triangle':
+      colorfulShapeGraphic.drawBlueTriangle();
+      break;
+  }
 });
-colorfulShapeGraphic.drawGreenRect();
-colorfulShapeGraphic.drawRedCircle();
-colorfulShapeGraphic.drawBlueTriangle();
 
 interface EventButtonElement extends HTMLButtonElement {
   dataset: {
@@ -39,5 +46,5 @@ function isEventButtonElement(
   if (eventTarget === null) return false;
   const isButtonElement = eventTarget instanceof HTMLButtonElement;
   if (!isButtonElement) return false;
-  return !!eventTarget.dataset?.event;
+  return Boolean(eventTarget.dataset?.event);
 }
