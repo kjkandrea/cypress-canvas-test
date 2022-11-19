@@ -23,12 +23,15 @@ rootElement.addEventListener('click', ({target}) => {
   const event = target.dataset.event;
   switch (event) {
     case 'draw-green-rect':
+      colorfulShapeGraphic.cleanUp();
       colorfulShapeGraphic.drawGreenRect();
       break;
     case 'draw-red-circle':
+      colorfulShapeGraphic.cleanUp();
       colorfulShapeGraphic.drawRedCircle();
       break;
     case 'draw-blue-triangle':
+      colorfulShapeGraphic.cleanUp();
       colorfulShapeGraphic.drawBlueTriangle();
       break;
   }

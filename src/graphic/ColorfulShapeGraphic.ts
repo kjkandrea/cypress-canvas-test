@@ -36,6 +36,13 @@ export default class ColorfulShapeGraphic {
     ctx.fill();
   }
 
+  public cleanUp() {
+    const ctx = this.canvas.getContext('2d')!;
+
+    ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    ctx.beginPath();
+  }
+
   private getCenterPosition(targetXY: VertexXY): VertexXY {
     const {width, height} = this.canvas;
     const [x, y] = targetXY;
