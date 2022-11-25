@@ -1,0 +1,408 @@
+// Colors
+$black: #0f0f0f;
+$white: #fdfdfd;
+
+$screen-black: #6c6c4e;
+$screen-white: #e3e6c9;
+
+// Sizes for Margo
+$s: 4; // size
+$m-c: 14; // columns
+$m-r: 14; // rows
+
+// Sprites for Margo
+$margo-stand: // row 0
+  5 * $s + px 0 $screen-black,
+  6 * $s + px 0 $screen-black,
+  7 * $s + px 0 $screen-black,
+  8 * $s + px 0 $screen-black,
+  9 * $s + px 0 $screen-black,
+    // row 1
+  4 * $s + px 1 * $s + px $screen-black,
+  10 * $s + px 1 * $s + px $screen-black,
+    // row 2
+  1 * $s + px 2 * $s + px $screen-black,
+  2 * $s + px 2 * $s + px $screen-black,
+  3 * $s + px 2 * $s + px $screen-black,
+  5 * $s + px 2 * $s + px $screen-black,
+  9 * $s + px 2 * $s + px $screen-black,
+  11 * $s + px 2 * $s + px $screen-black,
+    // row 3
+  0 * $s + px 3 * $s + px $screen-black,
+  12 * $s + px 3 * $s + px $screen-black,
+    // row 4
+  1 * $s + px 4 * $s + px $screen-black,
+  2 * $s + px 4 * $s + px $screen-black,
+  3 * $s + px 4 * $s + px $screen-black,
+  12 * $s + px 4 * $s + px $screen-black,
+    // row 5
+  0 * $s + px 5 * $s + px $screen-black,
+  12 * $s + px 5 * $s + px $screen-black,
+    // row 6
+  1 * $s + px 6 * $s + px $screen-black,
+  2 * $s + px 6 * $s + px $screen-black,
+  3 * $s + px 6 * $s + px $screen-black,
+  12 * $s + px 6 * $s + px $screen-black,
+    // row 7
+  3 * $s + px 7 * $s + px $screen-black,
+  8 * $s + px 7 * $s + px $screen-black,
+  10 * $s + px 7 * $s + px $screen-black,
+  13 * $s + px 7 * $s + px $screen-black,
+    // row 8
+  3 * $s + px 8 * $s + px $screen-black,
+  8 * $s + px 8 * $s + px $screen-black,
+  10 * $s + px 8 * $s + px $screen-black,
+  13 * $s + px 8 * $s + px $screen-black,
+    // row 9
+  3 * $s + px 9 * $s + px $screen-black,
+  9 * $s + px 9 * $s + px $screen-black,
+  13 * $s + px 9 * $s + px $screen-black,
+    // row 10
+  4 * $s + px 10 * $s + px $screen-black,
+  12 * $s + px 10 * $s + px $screen-black,
+    // row 11
+  5 * $s + px 11 * $s + px $screen-black,
+  7 * $s + px 11 * $s + px $screen-black,
+  8 * $s + px 11 * $s + px $screen-black,
+  9 * $s + px 11 * $s + px $screen-black,
+  11 * $s + px 11 * $s + px $screen-black,
+    // row 12
+  5 * $s + px 12 * $s + px $screen-black,
+  7 * $s + px 12 * $s + px $screen-black,
+  9 * $s + px 12 * $s + px $screen-black,
+  11 * $s + px 12 * $s + px $screen-black,
+    // row 13
+  6 * $s + px 13 * $s + px $screen-black,
+  10 * $s + px 13 * $s + px $screen-black;
+
+$margo-sit: // row 1
+  5 * $s + px 1 * $s + px $screen-black,
+  6 * $s + px 1 * $s + px $screen-black,
+  7 * $s + px 1 * $s + px $screen-black,
+  8 * $s + px 1 * $s + px $screen-black,
+  9 * $s + px 1 * $s + px $screen-black,
+    // row 2
+  4 * $s + px 2 * $s + px $screen-black,
+  10 * $s + px 2 * $s + px $screen-black,
+    // row 3
+  1 * $s + px 3 * $s + px $screen-black,
+  2 * $s + px 3 * $s + px $screen-black,
+  3 * $s + px 3 * $s + px $screen-black,
+  5 * $s + px 3 * $s + px $screen-black,
+  9 * $s + px 3 * $s + px $screen-black,
+  11 * $s + px 3 * $s + px $screen-black,
+    // row 4
+  0 * $s + px 4 * $s + px $screen-black,
+  12 * $s + px 4 * $s + px $screen-black,
+    // row 5
+  1 * $s + px 5 * $s + px $screen-black,
+  2 * $s + px 5 * $s + px $screen-black,
+  3 * $s + px 5 * $s + px $screen-black,
+  12 * $s + px 5 * $s + px $screen-black,
+    // row 6
+  0 * $s + px 6 * $s + px $screen-black,
+  12 * $s + px 6 * $s + px $screen-black,
+    // row 7
+  1 * $s + px 7 * $s + px $screen-black,
+  2 * $s + px 7 * $s + px $screen-black,
+  3 * $s + px 7 * $s + px $screen-black,
+  12 * $s + px 7 * $s + px $screen-black,
+    // row 8
+  3 * $s + px 8 * $s + px $screen-black,
+  8 * $s + px 8 * $s + px $screen-black,
+  10 * $s + px 8 * $s + px $screen-black,
+  13 * $s + px 8 * $s + px $screen-black,
+    // row 9
+  3 * $s + px 9 * $s + px $screen-black,
+  8 * $s + px 9 * $s + px $screen-black,
+  10 * $s + px 9 * $s + px $screen-black,
+  13 * $s + px 9 * $s + px $screen-black,
+    // row 10
+  3 * $s + px 10 * $s + px $screen-black,
+  9 * $s + px 10 * $s + px $screen-black,
+  13 * $s + px 10 * $s + px $screen-black,
+    // row 11
+  4 * $s + px 11 * $s + px $screen-black,
+  12 * $s + px 11 * $s + px $screen-black,
+    // row 12
+  5 * $s + px 12 * $s + px $screen-black,
+  7 * $s + px 12 * $s + px $screen-black,
+  8 * $s + px 12 * $s + px $screen-black,
+  9 * $s + px 12 * $s + px $screen-black,
+  11 * $s + px 12 * $s + px $screen-black,
+    // row 13
+  6 * $s + px 13 * $s + px $screen-black,
+  10 * $s + px 13 * $s + px $screen-black;
+
+$margo-toot: // row 0
+  1 * $s + px 0 $screen-black,
+  4 * $s + px 0 $screen-black,
+  5 * $s + px 0 $screen-black,
+  6 * $s + px 0 $screen-black,
+  7 * $s + px 0 $screen-black,
+  8 * $s + px 0 $screen-black,
+  9 * $s + px 0 $screen-black,
+    // row 1
+  0 * $s + px 1 * $s + px $screen-black,
+  2 * $s + px 1 * $s + px $screen-black,
+  3 * $s + px 1 * $s + px $screen-black,
+  5 * $s + px 1 * $s + px $screen-black,
+  10 * $s + px 1 * $s + px $screen-black,
+    // row 2
+  0 * $s + px 2 * $s + px $screen-black,
+  8 * $s + px 2 * $s + px $screen-black,
+  11 * $s + px 2 * $s + px $screen-black,
+    // row 3
+  1 * $s + px 3 * $s + px $screen-black,
+  2 * $s + px 3 * $s + px $screen-black,
+  3 * $s + px 3 * $s + px $screen-black,
+  12 * $s + px 3 * $s + px $screen-black,
+    // row 4
+  0 * $s + px 4 * $s + px $screen-black,
+  12 * $s + px 4 * $s + px $screen-black,
+    // row 5
+  0 * $s + px 5 * $s + px $screen-black,
+  2 * $s + px 5 * $s + px $screen-black,
+  3 * $s + px 5 * $s + px $screen-black,
+  12 * $s + px 5 * $s + px $screen-black,
+    // row 6
+  1 * $s + px 6 * $s + px $screen-black,
+  3 * $s + px 6 * $s + px $screen-black,
+  12 * $s + px 6 * $s + px $screen-black,
+    // row 7
+  3 * $s + px 7 * $s + px $screen-black,
+  8 * $s + px 7 * $s + px $screen-black,
+  10 * $s + px 7 * $s + px $screen-black,
+  13 * $s + px 7 * $s + px $screen-black,
+    // row 8
+  3 * $s + px 8 * $s + px $screen-black,
+  9 * $s + px 8 * $s + px $screen-black,
+  13 * $s + px 8 * $s + px $screen-black,
+    // row 9
+  3 * $s + px 9 * $s + px $screen-black,
+  13 * $s + px 9 * $s + px $screen-black,
+    // row 10
+  3 * $s + px 10 * $s + px $screen-black,
+  12 * $s + px 10 * $s + px $screen-black,
+    // row 11
+  4 * $s + px 11 * $s + px $screen-black,
+  6 * $s + px 11 * $s + px $screen-black,
+  7 * $s + px 11 * $s + px $screen-black,
+  9 * $s + px 11 * $s + px $screen-black,
+  10 * $s + px 11 * $s + px $screen-black,
+  11 * $s + px 11 * $s + px $screen-black,
+    // row 12
+  4 * $s + px 12 * $s + px $screen-black,
+  6 * $s + px 12 * $s + px $screen-black,
+  7 * $s + px 12 * $s + px $screen-black,
+  9 * $s + px 12 * $s + px $screen-black,
+    // row 13
+  5 * $s + px 13 * $s + px $screen-black,
+  8 * $s + px 13 * $s + px $screen-black;
+
+// Sizes for poop
+$p-c: 8; // columns
+$p-r: 9; // rows
+
+$poop: // row 0 is empty because pixel 0,0 doesnt work
+
+  // row 1
+  0px 1 * $s + px $screen-black,
+    // row 2
+  1 * $s + px 2 * $s + px $screen-black,
+  6 * $s + px 2 * $s + px $screen-black,
+    // row 3
+  0 * $s + px 3 * $s + px $screen-black,
+  7 * $s + px 3 * $s + px $screen-black,
+    // row 4
+  3 * $s + px 4 * $s + px $screen-black,
+  6 * $s + px 4 * $s + px $screen-black,
+    // row 5
+  3 * $s + px 5 * $s + px $screen-black,
+  4 * $s + px 5 * $s + px $screen-black,
+    // row 6
+  2 * $s + px 6 * $s + px $screen-black,
+  3 * $s + px 6 * $s + px $screen-black,
+  5 * $s + px 6 * $s + px $screen-black,
+    // row 7
+  1 * $s + px 7 * $s + px $screen-black,
+  3 * $s + px 7 * $s + px $screen-black,
+  4 * $s + px 7 * $s + px $screen-black,
+  5 * $s + px 7 * $s + px $screen-black,
+  6 * $s + px 7 * $s + px $screen-black,
+    // row 8
+  1 * $s + px 8 * $s + px $screen-black,
+  2 * $s + px 8 * $s + px $screen-black,
+  3 * $s + px 8 * $s + px $screen-black,
+  4 * $s + px 8 * $s + px $screen-black,
+  5 * $s + px 8 * $s + px $screen-black,
+  6 * $s + px 8 * $s + px $screen-black;
+
+html {
+  font-family: 'Courier', Helvetica, sans-serif;
+}
+
+.tamagotchi {
+  width: 100%;
+  height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 5px;
+
+  .screen {
+    position: relative;
+
+    &__inner {
+      background: $screen-white;
+      width: 126px;
+      height: 126px;
+      border: 1px solid $screen-black;
+      border-radius: 13px;
+      position: relative;
+      z-index: 1;
+      overflow: hidden;
+
+      &:before,
+      &:after {
+        content: '';
+        position: absolute;
+        left: 0;
+        width: 100%;
+        height: 26px;
+        background-color: rgba($screen-black, 0.3);
+      }
+
+      &:before {
+        top: 0;
+        border-radius: 13px 13px 0 0;
+      }
+
+      &:after {
+        bottom: 0;
+        border-radius: 0 0 13px 13px;
+      }
+    }
+  }
+
+  .Margo { // Yes, It's capitalized. It's her name goddamnit!
+    position: absolute;
+    bottom: 30px;
+    left: 23px;
+    height: $s * $m-r + px;
+    width: $s * $m-c + px;
+    animation: margo-walk 1500*4+ms steps(4) infinite;
+
+    &:before {
+      content: '';
+      display: block;
+      width: $s+px;
+      height: $s+px;
+      box-shadow: $margo-stand;
+      //animation: margo-rest 1500ms steps(1) infinite;
+    }
+
+    &:after {
+      content: '';
+      display: block;
+      width: $s+px;
+      height: $s+px;
+      box-shadow: $margo-stand;
+      //animation: margo-rest 1500ms steps(1) infinite;
+      opacity: 0.2;
+      transform: translateY(-2px);
+    }
+
+    &.has-pooped:before,
+    &.has-pooped:after {
+      animation: margo-toot 1500ms steps(1) infinite !important;
+    }
+  }
+
+  @keyframes margo-rest {
+    0% {
+      box-shadow: $margo-stand
+    }
+    50% {
+      box-shadow: $margo-sit
+    }
+  }
+
+  @keyframes margo-toot {
+    0% {
+      box-shadow: $margo-stand
+    }
+    50% {
+      box-shadow: $margo-toot
+    }
+  }
+
+  @keyframes margo-walk {
+    0% {
+      transform: translateX(0)
+    }
+    50% {
+      transform: translateX($s*-4+px) scale(1, 1)
+    }
+    50.0001% {
+      transform: translateX($s*-4+px) scale(-1, 1)
+    }
+    99.9999% {
+      transform: translateX(0) scale(-1, 1)
+    }
+    100% {
+      transform: translateX(0) scale(1, 1)
+    }
+  }
+
+  .poop {
+    position: absolute;
+    bottom: 34px;
+    right: 4px;
+    width: $s * $p-r + px;
+    height: $s * $p-c + px;
+    animation: poop 1500ms steps(1) infinite;
+    opacity: 0;
+
+    &.is-visible {
+      opacity: 1;
+    }
+
+    &:before {
+      content: '';
+      display: block;
+      width: $s+px;
+      height: $s+px;
+      box-shadow: $poop;
+    }
+
+    &:after {
+      content: '';
+      display: block;
+      width: $s+px;
+      height: $s+px;
+      box-shadow: $poop;
+      opacity: 0.2;
+      transform: translateY(-2px);
+    }
+  }
+
+  @keyframes poop {
+    0% {
+      transform: scale(1, 1)
+    }
+    50% {
+      transform: scale(-1, 1) translateX($s + px);
+    }
+  }
+
+  button {
+    font-family: inherit;
+    padding: 4px 12px;
+    border: 1px solid $screen-black;
+    background-color: rgba($screen-black, 0.3);
+    border-radius: 3px;
+  }
+}
