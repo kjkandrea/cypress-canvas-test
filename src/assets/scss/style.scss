@@ -253,156 +253,165 @@ html {
   flex-direction: column;
   gap: 5px;
 
-  .screen {
-    &__inner {
-      background: $screen-white;
-      width: 126px;
-      height: 126px;
-      border: 1px solid $screen-black;
-      border-radius: 13px;
-      position: relative;
-      z-index: 1;
-      overflow: hidden;
+  .tamagotchi {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
 
-      &:before,
+    .screen {
+      &__inner {
+        box-sizing: border-box;
+
+        background: $screen-white;
+        width: 126px;
+        height: 126px;
+        margin: 0 auto;
+        border: 1px solid $screen-black;
+        border-radius: 13px;
+        position: relative;
+        z-index: 1;
+        overflow: hidden;
+
+        &:before,
+        &:after {
+          content: '';
+          position: absolute;
+          left: 0;
+          width: 100%;
+          height: 26px;
+          background-color: rgba($screen-black, 0.3);
+        }
+
+        &:before {
+          top: 0;
+          border-radius: 13px 13px 0 0;
+        }
+
+        &:after {
+          bottom: 0;
+          border-radius: 0 0 13px 13px;
+        }
+      }
+    }
+
+    .Margo { // Yes, It's capitalized. It's her name goddamnit!
+      position: absolute;
+      bottom: 30px;
+      left: 23px;
+      height: $s * $m-r + px;
+      width: $s * $m-c + px;
+      animation: margo-walk 1500*4+ms steps(4) infinite;
+
+      &:before {
+        content: '';
+        display: block;
+        width: $s+px;
+        height: $s+px;
+        box-shadow: $margo-stand;
+        //animation: margo-rest 1500ms steps(1) infinite;
+      }
+
       &:after {
         content: '';
-        position: absolute;
-        left: 0;
-        width: 100%;
-        height: 26px;
-        background-color: rgba($screen-black, 0.3);
+        display: block;
+        width: $s+px;
+        height: $s+px;
+        box-shadow: $margo-stand;
+        //animation: margo-rest 1500ms steps(1) infinite;
+        opacity: 0.2;
+        transform: translateY(-2px);
+      }
+
+      &.has-pooped:before,
+      &.has-pooped:after {
+        animation: margo-toot 1500ms steps(1) infinite !important;
+      }
+    }
+
+    @keyframes margo-rest {
+      0% {
+        box-shadow: $margo-stand
+      }
+      50% {
+        box-shadow: $margo-sit
+      }
+    }
+
+    @keyframes margo-toot {
+      0% {
+        box-shadow: $margo-stand
+      }
+      50% {
+        box-shadow: $margo-toot
+      }
+    }
+
+    @keyframes margo-walk {
+      0% {
+        transform: translateX(0)
+      }
+      50% {
+        transform: translateX($s*-4+px) scale(1, 1)
+      }
+      50.0001% {
+        transform: translateX($s*-4+px) scale(-1, 1)
+      }
+      99.9999% {
+        transform: translateX(0) scale(-1, 1)
+      }
+      100% {
+        transform: translateX(0) scale(1, 1)
+      }
+    }
+
+    .poop {
+      position: absolute;
+      bottom: 34px;
+      right: 4px;
+      width: $s * $p-r + px;
+      height: $s * $p-c + px;
+      animation: poop 1500ms steps(1) infinite;
+      opacity: 0;
+
+      &.is-visible {
+        opacity: 1;
       }
 
       &:before {
-        top: 0;
-        border-radius: 13px 13px 0 0;
+        content: '';
+        display: block;
+        width: $s+px;
+        height: $s+px;
+        box-shadow: $poop;
       }
 
       &:after {
-        bottom: 0;
-        border-radius: 0 0 13px 13px;
+        content: '';
+        display: block;
+        width: $s+px;
+        height: $s+px;
+        box-shadow: $poop;
+        opacity: 0.2;
+        transform: translateY(-2px);
       }
     }
-  }
 
-  .Margo { // Yes, It's capitalized. It's her name goddamnit!
-    position: absolute;
-    bottom: 30px;
-    left: 23px;
-    height: $s * $m-r + px;
-    width: $s * $m-c + px;
-    animation: margo-walk 1500*4+ms steps(4) infinite;
-
-    &:before {
-      content: '';
-      display: block;
-      width: $s+px;
-      height: $s+px;
-      box-shadow: $margo-stand;
-      //animation: margo-rest 1500ms steps(1) infinite;
+    @keyframes poop {
+      0% {
+        transform: scale(1, 1)
+      }
+      50% {
+        transform: scale(-1, 1) translateX($s + px);
+      }
     }
 
-    &:after {
-      content: '';
-      display: block;
-      width: $s+px;
-      height: $s+px;
-      box-shadow: $margo-stand;
-      //animation: margo-rest 1500ms steps(1) infinite;
-      opacity: 0.2;
-      transform: translateY(-2px);
+    button {
+      font-family: inherit;
+      padding: 4px 12px;
+      border: 1px solid $screen-black;
+      background-color: rgba($screen-black, 0.3);
+      border-radius: 3px;
+      cursor: pointer;
     }
-
-    &.has-pooped:before,
-    &.has-pooped:after {
-      animation: margo-toot 1500ms steps(1) infinite !important;
-    }
-  }
-
-  @keyframes margo-rest {
-    0% {
-      box-shadow: $margo-stand
-    }
-    50% {
-      box-shadow: $margo-sit
-    }
-  }
-
-  @keyframes margo-toot {
-    0% {
-      box-shadow: $margo-stand
-    }
-    50% {
-      box-shadow: $margo-toot
-    }
-  }
-
-  @keyframes margo-walk {
-    0% {
-      transform: translateX(0)
-    }
-    50% {
-      transform: translateX($s*-4+px) scale(1, 1)
-    }
-    50.0001% {
-      transform: translateX($s*-4+px) scale(-1, 1)
-    }
-    99.9999% {
-      transform: translateX(0) scale(-1, 1)
-    }
-    100% {
-      transform: translateX(0) scale(1, 1)
-    }
-  }
-
-  .poop {
-    position: absolute;
-    bottom: 34px;
-    right: 4px;
-    width: $s * $p-r + px;
-    height: $s * $p-c + px;
-    animation: poop 1500ms steps(1) infinite;
-    opacity: 0;
-
-    &.is-visible {
-      opacity: 1;
-    }
-
-    &:before {
-      content: '';
-      display: block;
-      width: $s+px;
-      height: $s+px;
-      box-shadow: $poop;
-    }
-
-    &:after {
-      content: '';
-      display: block;
-      width: $s+px;
-      height: $s+px;
-      box-shadow: $poop;
-      opacity: 0.2;
-      transform: translateY(-2px);
-    }
-  }
-
-  @keyframes poop {
-    0% {
-      transform: scale(1, 1)
-    }
-    50% {
-      transform: scale(-1, 1) translateX($s + px);
-    }
-  }
-
-  button {
-    font-family: inherit;
-    padding: 4px 12px;
-    border: 1px solid $screen-black;
-    background-color: rgba($screen-black, 0.3);
-    border-radius: 3px;
-    cursor: pointer;
   }
 }

@@ -5,14 +5,15 @@ import cleanPoopSound from './assets/sounds/clean-poop.mp3';
 import poopingSound from './assets/sounds/pooping.mp3';
 
 const tamagotchiTemplate = `
+  <p>clean count : <span class="clean-count">0</span></p> 
   <div class='tamagotchi__inner'>
-      <div class='screen' data-test-id='screen'>
-        <div class='screen__inner'>
-          <div class='Margo'></div>
-          <div class='poop'></div>
-        </div>
+    <div class='screen'>
+      <div class='screen__inner' data-test-id='screen'>
+        <div class='Margo'></div>
+        <div class='poop'></div>
       </div>
     </div>
+  </div>
 `;
 
 const root = document.querySelector<HTMLDivElement>('#app') as HTMLDivElement;
@@ -44,10 +45,16 @@ const sound = {
 class Pooper {
   private readonly Margo: HTMLDivElement;
   private readonly poopArea: HTMLDivElement;
+  private readonly cleanCount: HTMLSpanElement;
 
-  constructor(Margo: HTMLDivElement, poopArea: HTMLDivElement) {
+  constructor(
+    Margo: HTMLDivElement,
+    poopArea: HTMLDivElement,
+    cleanCount: HTMLSpanElement
+  ) {
     this.Margo = Margo;
     this.poopArea = poopArea;
+    this.cleanCount = cleanCount;
   }
 
   make() {
@@ -70,6 +77,9 @@ class Pooper {
       sound.cleanPoop.play().then(() => {
         this.hide();
       });
+      this.cleanCount.textContent = String(
+        Number(this.cleanCount.textContent) + 1
+      );
     }
   }
 }
@@ -80,7 +90,9 @@ const init = () => {
 
   const Margo = elem.root.querySelector('.Margo') as HTMLDivElement;
   const poopArea = elem.root.querySelector('.poop') as HTMLDivElement;
-  const pooper = new Pooper(Margo, poopArea);
+  const cleanCount = document.querySelector('.clean-count') as HTMLSpanElement;
+  console.log(cleanCount);
+  const pooper = new Pooper(Margo, poopArea, cleanCount);
   elem.cleanPoopButton.addEventListener('click', () => pooper.clean());
   setInterval(() => pooper.make(), 4000);
 };
