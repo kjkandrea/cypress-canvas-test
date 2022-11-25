@@ -1,4 +1,4 @@
-import './style.scss';
+import './assets/scss/style.scss';
 
 const rootElement = document.querySelector<HTMLDivElement>('#app')!;
 
@@ -22,7 +22,7 @@ const cleanPoopButton = document.querySelector('.clean-poop') as HTMLDivElement;
 
 const poop = {
   cleaned: 0,
-  show() {
+  make() {
     if (!Margo.classList.contains('has-pooped')) {
       poopArea.classList.add('is-visible');
       Margo.classList.add('has-pooped');
@@ -40,7 +40,7 @@ const poop = {
   },
 };
 
-setInterval(poop.show, 4000);
+setInterval(poop.make, 4000);
 
 const init = () => {
   cleanPoopButton.addEventListener('click', poop.clean);
