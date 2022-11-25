@@ -12,28 +12,30 @@ rootElement.innerHTML = `
         </div>
       </div>
     </div>
-    <button class='clean-poop'>Clean Poop</button>
+    <button class='clean-poop' type='button'>Clean Poop</button>
   </div>
 `;
 
-const Margo = document.querySelector('.Margo') as HTMLDivElement;
-const poopArea = document.querySelector('.poop') as HTMLDivElement;
-const cleanPoopButton = document.querySelector('.clean-poop') as HTMLDivElement;
+const elem = {
+  Margo: document.querySelector('.Margo') as HTMLDivElement,
+  poopArea: document.querySelector('.poop') as HTMLDivElement,
+  cleanPoopButton: document.querySelector('.clean-poop') as HTMLDivElement,
+};
 
 const poop = {
   cleaned: 0,
   make() {
-    if (!Margo.classList.contains('has-pooped')) {
-      poopArea.classList.add('is-visible');
-      Margo.classList.add('has-pooped');
+    if (!elem.Margo.classList.contains('has-pooped')) {
+      elem.poopArea.classList.add('is-visible');
+      elem.Margo.classList.add('has-pooped');
     }
   },
   hide() {
-    poopArea.classList.remove('is-visible');
-    Margo.classList.remove('has-pooped');
+    elem.poopArea.classList.remove('is-visible');
+    elem.Margo.classList.remove('has-pooped');
   },
   clean() {
-    if (Margo.classList.contains('has-pooped')) {
+    if (elem.Margo.classList.contains('has-pooped')) {
       poop.hide();
       poop.cleaned++;
     }
@@ -43,7 +45,7 @@ const poop = {
 setInterval(poop.make, 4000);
 
 const init = () => {
-  cleanPoopButton.addEventListener('click', poop.clean);
+  elem.cleanPoopButton.addEventListener('click', poop.clean);
 };
 
 init();
