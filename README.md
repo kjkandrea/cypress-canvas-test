@@ -1,5 +1,4 @@
-# cypress-canvas-test
-cypress 및 canvas 테스트 연습!
+# cypress-tamagotchi-test
 
 ## 테스트의 이유
 
