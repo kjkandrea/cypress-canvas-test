@@ -6,7 +6,7 @@ import poopingSound from './assets/sounds/pooping.mp3';
 
 const tamagotchiTemplate = `
   <div class='tamagotchi__inner'>
-      <div class='screen'>
+      <div class='screen' data-test-id='screen'>
         <div class='screen__inner'>
           <div class='Margo'></div>
           <div class='poop'></div>
@@ -26,7 +26,7 @@ startButton.textContent = 'Start';
 const cleanPoopButton = document.createElement('button');
 cleanPoopButton.type = 'button';
 cleanPoopButton.classList.add('clean-poop');
-cleanPoopButton.textContent = 'Clean poop';
+cleanPoopButton.textContent = 'Clean Poop';
 root.append(startButton);
 
 const elem = {
