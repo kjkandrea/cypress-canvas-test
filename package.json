@@ -1,8 +1,10 @@
 {
-  "name": "cypress-canvas-test",
+  "name": "tamagotchi-canvas-test",
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "license": "MIT",
+  "description": "tamagotchi made in Konstantin Aistre. https://codepen.io/mr-tamagotchi/pen/bBYEME",
   "scripts": {
     "cypress": "cypress open",
     "dev": "vite",
@@ -20,6 +22,7 @@
     "@types/node": "^14.11.2",
     "cypress": "^11.0.1",
     "gts": "^3.1.1",
+    "sass": "^1.56.1",
     "typescript": "~4.7.0",
     "vite": "^3.2.3"
   }
