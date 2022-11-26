@@ -5,7 +5,7 @@ import cleanPoopSound from './assets/sounds/clean-poop.mp3';
 import poopingSound from './assets/sounds/pooping.mp3';
 
 const tamagotchiTemplate = `
-  <p>clean count : <span class="clean-count">0</span></p> 
+  <p>Clean Count : <span class="clean-count">0</span></p> 
   <div class='tamagotchi__inner'>
     <div class='screen'>
       <div class='screen__inner' data-test-id='screen'>
@@ -91,7 +91,6 @@ const init = () => {
   const Karenin = elem.root.querySelector('.Karenin') as HTMLDivElement;
   const poopArea = elem.root.querySelector('.poop') as HTMLDivElement;
   const cleanCount = document.querySelector('.clean-count') as HTMLSpanElement;
-  console.log(cleanCount);
   const pooper = new Pooper(Karenin, poopArea, cleanCount);
   elem.cleanPoopButton.addEventListener('click', () => pooper.clean());
   setInterval(() => pooper.make(), 4000);
