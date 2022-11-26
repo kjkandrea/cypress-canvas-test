@@ -74,7 +74,7 @@ class KareninLife {
       sound.on.play().then(() => {
         this.meal.classList.add('is-visible');
         this.karenin.classList.add('has-mealed');
-        elem.giveMealButton.style.display = 'none';
+        elem.giveMealButton.disabled = true;
         setTimeout(() => this.eatMeal(), 4000);
       });
     }
@@ -90,7 +90,6 @@ class KareninLife {
   }
 
   hideMeal() {
-    console.log('hideMeal');
     this.meal.classList.remove('is-visible');
     this.karenin.classList.remove('has-mealed');
   }
@@ -102,7 +101,7 @@ class KareninLife {
       sound.on.play().then(() => {
         this.poop.classList.add('is-visible');
         this.karenin.classList.add('has-pooped');
-        elem.cleanPoopButton.style.display = 'block';
+        elem.cleanPoopButton.disabled = false;
       });
     }
   }
@@ -111,8 +110,8 @@ class KareninLife {
     if (this.karenin.classList.contains('has-pooped')) {
       sound.off.play().then(() => {
         this.hidePoop();
-        elem.giveMealButton.style.display = 'block';
-        elem.cleanPoopButton.style.display = 'none';
+        elem.giveMealButton.disabled = false;
+        elem.cleanPoopButton.disabled = true;
         this.cleanCount.textContent = String(
           Number(this.cleanCount.textContent) + 1
         );
@@ -137,8 +136,8 @@ const init = () => {
   const keraninLife = new KareninLife(Karenin, poop, meal, cleanCount);
   elem.giveMealButton.addEventListener('click', () => keraninLife.giveMeal());
   elem.cleanPoopButton.addEventListener('click', () => keraninLife.cleanPoop());
-  elem.giveMealButton.style.display = 'none';
-  elem.cleanPoopButton.style.display = 'none';
+  elem.giveMealButton.disabled = true;
+  elem.cleanPoopButton.disabled = true;
   setTimeout(() => keraninLife.pooping(), 4000);
 };
 
