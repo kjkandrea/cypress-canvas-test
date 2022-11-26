@@ -5,13 +5,13 @@ $white: #fdfdfd;
 $screen-black: #6c6c4e;
 $screen-white: #e3e6c9;
 
-// Sizes for Margo
+// Sizes for Karenin
 $s: 4; // size
 $m-c: 14; // columns
 $m-r: 14; // rows
 
-// Sprites for Margo
-$margo-stand: // row 0
+// Sprites for Karenin
+$karenin-stand: // row 0
   5 * $s + px 0 $screen-black,
   6 * $s + px 0 $screen-black,
   7 * $s + px 0 $screen-black,
@@ -75,7 +75,7 @@ $margo-stand: // row 0
   6 * $s + px 13 * $s + px $screen-black,
   10 * $s + px 13 * $s + px $screen-black;
 
-$margo-sit: // row 1
+$karenin-sit: // row 1
   5 * $s + px 1 * $s + px $screen-black,
   6 * $s + px 1 * $s + px $screen-black,
   7 * $s + px 1 * $s + px $screen-black,
@@ -134,7 +134,7 @@ $margo-sit: // row 1
   6 * $s + px 13 * $s + px $screen-black,
   10 * $s + px 13 * $s + px $screen-black;
 
-$margo-toot: // row 0
+$karenin-toot: // row 0
   1 * $s + px 0 $screen-black,
   4 * $s + px 0 $screen-black,
   5 * $s + px 0 $screen-black,
@@ -294,21 +294,21 @@ html {
       }
     }
 
-    .Margo { // Yes, It's capitalized. It's her name goddamnit!
+    .Karenin { // Yes, It's capitalized. It's her name goddamnit!
       position: absolute;
       bottom: 30px;
       left: 23px;
       height: $s * $m-r + px;
       width: $s * $m-c + px;
-      animation: margo-walk 1500*4+ms steps(4) infinite;
+      animation: karenin-walk 1500*4+ms steps(4) infinite;
 
       &:before {
         content: '';
         display: block;
         width: $s+px;
         height: $s+px;
-        box-shadow: $margo-stand;
-        //animation: margo-rest 1500ms steps(1) infinite;
+        box-shadow: $karenin-stand;
+        //animation: karenin-rest 1500ms steps(1) infinite;
       }
 
       &:after {
@@ -316,37 +316,37 @@ html {
         display: block;
         width: $s+px;
         height: $s+px;
-        box-shadow: $margo-stand;
-        //animation: margo-rest 1500ms steps(1) infinite;
+        box-shadow: $karenin-stand;
+        //animation: karenin-rest 1500ms steps(1) infinite;
         opacity: 0.2;
         transform: translateY(-2px);
       }
 
       &.has-pooped:before,
       &.has-pooped:after {
-        animation: margo-toot 1500ms steps(1) infinite !important;
+        animation: karenin-toot 1500ms steps(1) infinite !important;
       }
     }
 
-    @keyframes margo-rest {
+    @keyframes karenin-rest {
       0% {
-        box-shadow: $margo-stand
+        box-shadow: $karenin-stand
       }
       50% {
-        box-shadow: $margo-sit
+        box-shadow: $karenin-sit
       }
     }
 
-    @keyframes margo-toot {
+    @keyframes karenin-toot {
       0% {
-        box-shadow: $margo-stand
+        box-shadow: $karenin-stand
       }
       50% {
-        box-shadow: $margo-toot
+        box-shadow: $karenin-toot
       }
     }
 
-    @keyframes margo-walk {
+    @keyframes karenin-walk {
       0% {
         transform: translateX(0)
       }

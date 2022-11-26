@@ -18,7 +18,7 @@ describe('다마고찌', () => {
     cy.contains('Start').click();
     cy.tick(4050);
     cy.get('.poop').should('be.visible');
-    cy.get('.Margo').should('have.class', 'has-pooped');
+    cy.get('.Karenin').should('have.class', 'has-pooped');
     cy.clock().then(clock => {
       clock.restore();
     });
