@@ -36,6 +36,7 @@ describe('다마고찌', () => {
 
     makeAndClean();
   });
+
   it('생성된 Poop 을 치울 때 마다 clean count 가 증가한다.', () => {
     cy.clock();
     cy.contains('Start').click();
