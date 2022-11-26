@@ -35,15 +35,22 @@ describe('다마고찌', () => {
     cy.get('.poop').should('be.hidden');
   });
 
-  it(`Poop 을 치운 후 ${
-    ACTION_DURATION / 1000
-  }초 이후 Give a Meal 버튼이 활성화 된다.`, () => {
+  it('생성된 Poop 을 치울 때 마다 Clean Count 가 증가한다.', () => {
     cy.clock();
     cy.contains('Start').click();
 
     cy.tick(ACTION_DURATION);
     cy.contains('Clean Poop').click();
+    cy.contains('Clean Count : 1');
+  });
+
+  it(`Poop 을 치운 후 ${
+    ACTION_DURATION / 1000
+  }초 이후 Give a Meal 버튼이 활성화 된다.`, () => {
+    cy.clock();
+    cy.contains('Start').click();
     cy.tick(ACTION_DURATION);
+    cy.contains('Clean Poop').click();
     cy.contains('Give a Meal').should('be.enabled');
   });
 
@@ -52,34 +59,53 @@ describe('다마고찌', () => {
     cy.contains('Start').click();
     cy.tick(ACTION_DURATION);
     cy.contains('Clean Poop').click();
-    cy.tick(ACTION_DURATION);
     cy.contains('Give a Meal').click();
     cy.get('.meal').should('be.visible');
   });
 
-  it('생성된 Poop 을 치울 때 마다 Clean Count 가 증가한다.', () => {
+  it('Meal 이 나타나면 4초 뒤 사라지고 Poop 이 나타난다.', () => {
+    cy.clock();
+    cy.contains('Start').click();
+    cy.tick(ACTION_DURATION);
+    cy.contains('Clean Poop').click();
+    cy.contains('Give a Meal').click();
+    cy.get('.meal').should('be.visible');
+    cy.tick(ACTION_DURATION);
+    cy.get('.meal').should('be.hidden');
+    cy.tick(ACTION_DURATION);
+    cy.get('.poop').should('be.visible');
+  });
+
+  it('위와 같이 Karenin 은 영원히 순환하는 시간을 산다.', () => {
     cy.clock();
     cy.contains('Start').click();
 
-    const makeAndClean = () => {
+    const kareninLife = (i: number) => {
       cy.tick(ACTION_DURATION);
       cy.contains('Clean Poop').click();
-      cy.tick(ACTION_DURATION);
+      cy.contains(`Clean Count : ${i}`);
       cy.contains('Give a Meal').click();
+      cy.get('.meal').should('be.visible');
       cy.tick(ACTION_DURATION);
+      cy.get('.meal').should('be.hidden');
+      cy.tick(ACTION_DURATION);
+      cy.get('.poop').should('be.visible');
     };
 
-    makeAndClean();
-    cy.contains('Clean Count : 1');
-    // TODO: 재귀 호출 가능하게 테스트 수정
-    // makeAndClean();
-    // cy.contains('Clean Count : 2');
+    const range = function* (stop: number) {
+      let i = -1;
+      while (++i < stop) yield i;
+    };
 
-    // const testRange = Array.from({length: 2}, (_, i) => i + 1);
-    //
-    // cy.wrap(testRange).each(i => {
-    //   makeAndClean();
-    //   cy.contains(`Clean Count : ${i}`);
-    // });
+    const howMany = range(999); // if Infinity, cypress dies.. 😔
+    let looping = true;
+    while (looping) {
+      const {value, done} = howMany.next();
+      if (done) {
+        looping = false;
+        break;
+      }
+      kareninLife(value + 1);
+    }
   });
 });
