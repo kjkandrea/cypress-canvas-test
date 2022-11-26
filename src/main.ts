@@ -10,6 +10,7 @@ const tamagotchiTemplate = `
     <div class='screen'>
       <div class='screen__inner' data-test-id='screen'>
         <div class='Karenin'></div>
+        <div class='meal'></div>
         <div class='poop'></div>
       </div>
     </div>
@@ -24,76 +25,121 @@ const startButton = document.createElement('button');
 startButton.type = 'button';
 startButton.classList.add('start');
 startButton.textContent = 'Start';
+root.append(startButton);
+const giveMealButton = document.createElement('button');
+giveMealButton.type = 'button';
+giveMealButton.classList.add('give-meal');
+giveMealButton.textContent = 'Give a Meal';
 const cleanPoopButton = document.createElement('button');
 cleanPoopButton.type = 'button';
 cleanPoopButton.classList.add('clean-poop');
 cleanPoopButton.textContent = 'Clean Poop';
-root.append(startButton);
 
 const elem = {
   root,
   tamagotchi,
   startButton,
   cleanPoopButton,
+  giveMealButton,
 };
 
 const sound = {
-  cleanPoop: new Audio(cleanPoopSound),
-  pooping: new Audio(poopingSound),
+  on: new Audio(poopingSound),
+  off: new Audio(cleanPoopSound),
 };
 
-class Pooper {
-  private readonly Karenin: HTMLDivElement;
-  private readonly poopArea: HTMLDivElement;
+class KareninLife {
+  private readonly karenin: HTMLDivElement;
+  private readonly poop: HTMLDivElement;
+  private readonly meal: HTMLDivElement;
   private readonly cleanCount: HTMLSpanElement;
 
   constructor(
     Karenin: HTMLDivElement,
-    poopArea: HTMLDivElement,
+    poop: HTMLDivElement,
+    meal: HTMLDivElement,
     cleanCount: HTMLSpanElement
   ) {
-    this.Karenin = Karenin;
-    this.poopArea = poopArea;
+    this.karenin = Karenin;
+    this.poop = poop;
+    this.meal = meal;
     this.cleanCount = cleanCount;
   }
 
-  make() {
-    if (!this.Karenin.classList.contains('has-pooped')) {
-      this.poopArea.classList.add('is-visible');
-      this.Karenin.classList.add('has-pooped');
-      sound.pooping.play().then(() => {
-        this.poopArea.classList.add('is-visible');
-        this.Karenin.classList.add('has-pooped');
+  giveMeal() {
+    if (
+      !this.karenin.classList.contains('has-pooped') &&
+      !this.karenin.classList.contains('has-mealed')
+    ) {
+      sound.on.play().then(() => {
+        this.meal.classList.add('is-visible');
+        this.karenin.classList.add('has-mealed');
+        elem.giveMealButton.style.display = 'none';
+        setTimeout(() => this.eatMeal(), 4000);
+      });
+    }
+  }
+
+  eatMeal() {
+    if (this.karenin.classList.contains('has-mealed')) {
+      sound.off.play().then(() => {
+        this.hideMeal();
+        setTimeout(() => this.pooping(), 4000);
+      });
+    }
+  }
+
+  hideMeal() {
+    console.log('hideMeal');
+    this.meal.classList.remove('is-visible');
+    this.karenin.classList.remove('has-mealed');
+  }
+
+  pooping() {
+    if (!this.karenin.classList.contains('has-pooped')) {
+      this.poop.classList.add('is-visible');
+      this.karenin.classList.add('has-pooped');
+      sound.on.play().then(() => {
+        this.poop.classList.add('is-visible');
+        this.karenin.classList.add('has-pooped');
         elem.cleanPoopButton.style.display = 'block';
       });
     }
   }
-  hide() {
-    this.poopArea.classList.remove('is-visible');
-    this.Karenin.classList.remove('has-pooped');
-  }
-  clean() {
-    if (this.Karenin.classList.contains('has-pooped')) {
-      sound.cleanPoop.play().then(() => {
-        this.hide();
+
+  cleanPoop() {
+    if (this.karenin.classList.contains('has-pooped')) {
+      sound.off.play().then(() => {
+        this.hidePoop();
+        elem.giveMealButton.style.display = 'block';
+        elem.cleanPoopButton.style.display = 'none';
+        this.cleanCount.textContent = String(
+          Number(this.cleanCount.textContent) + 1
+        );
       });
-      this.cleanCount.textContent = String(
-        Number(this.cleanCount.textContent) + 1
-      );
     }
+  }
+
+  hidePoop() {
+    this.poop.classList.remove('is-visible');
+    this.karenin.classList.remove('has-pooped');
   }
 }
 
 const init = () => {
   elem.startButton.remove();
-  elem.root.append(elem.tamagotchi, elem.cleanPoopButton);
+  elem.root.append(elem.tamagotchi, elem.giveMealButton, elem.cleanPoopButton);
 
   const Karenin = elem.root.querySelector('.Karenin') as HTMLDivElement;
-  const poopArea = elem.root.querySelector('.poop') as HTMLDivElement;
+  const poop = elem.root.querySelector('.poop') as HTMLDivElement;
+  const meal = elem.root.querySelector('.meal') as HTMLDivElement;
   const cleanCount = document.querySelector('.clean-count') as HTMLSpanElement;
-  const pooper = new Pooper(Karenin, poopArea, cleanCount);
-  elem.cleanPoopButton.addEventListener('click', () => pooper.clean());
-  setInterval(() => pooper.make(), 4000);
+  const keraninLife = new KareninLife(Karenin, poop, meal, cleanCount);
+  elem.giveMealButton.addEventListener('click', () => keraninLife.giveMeal());
+  elem.cleanPoopButton.addEventListener('click', () => keraninLife.cleanPoop());
+  elem.giveMealButton.style.display = 'none';
+  elem.cleanPoopButton.style.display = 'none';
+  setTimeout(() => keraninLife.pooping(), 4000);
 };
 
 elem.startButton.addEventListener('click', () => {

@@ -204,6 +204,39 @@ $karenin-toot: // row 0
 $p-c: 8; // columns
 $p-r: 9; // rows
 
+$meal:
+  // row 2
+  3 * $s + px 2 * $s + px $screen-black,
+  4 * $s + px 1 * $s + px $screen-black,
+  // row 3
+  3 * $s + px 3 * $s + px $screen-black,
+  // row 4
+  2 * $s + px 4 * $s + px $screen-black,
+  3 * $s + px 4 * $s + px $screen-black,
+  4 * $s + px 4 * $s + px $screen-black,
+  5 * $s + px 4 * $s + px $screen-black,
+  // row 5
+  1 * $s + px 5 * $s + px $screen-black,
+  2 * $s + px 5 * $s + px $screen-black,
+  3 * $s + px 5 * $s + px $screen-black,
+  4 * $s + px 5 * $s + px $screen-black,
+  5 * $s + px 5 * $s + px $screen-black,
+  6 * $s + px 5 * $s + px $screen-black,
+  // row 6
+  1 * $s + px 6 * $s + px $screen-black,
+  2 * $s + px 6 * $s + px $screen-black,
+  3 * $s + px 6 * $s + px $screen-black,
+  4 * $s + px 6 * $s + px $screen-black,
+  6 * $s + px 6 * $s + px $screen-black,
+  // row 7
+  1 * $s + px 7 * $s + px $screen-black,
+  6 * $s + px 7 * $s + px $screen-black,
+  // row 8
+  2 * $s + px 8 * $s + px $screen-black,
+  3 * $s + px 8 * $s + px $screen-black,
+  4 * $s + px 8 * $s + px $screen-black,
+  5 * $s + px 8 * $s + px $screen-black;
+
 $poop: // row 0 is empty because pixel 0,0 doesnt work
 
   // row 1
@@ -322,8 +355,8 @@ html {
         transform: translateY(-2px);
       }
 
-      &.has-pooped:before,
-      &.has-pooped:after {
+      &.has-mealed:before, &.has-pooped:before,
+      &.has-mealed:after, &.has-pooped:after {
         animation: karenin-toot 1500ms steps(1) infinite !important;
       }
     }
@@ -361,6 +394,47 @@ html {
       }
       100% {
         transform: translateX(0) scale(1, 1)
+      }
+    }
+
+    .meal {
+      position: absolute;
+      bottom: 34px;
+      right: 4px;
+      width: $s * $p-r + px;
+      height: $s * $p-c + px;
+      animation: meal 1500ms steps(1) infinite;
+      opacity: 0;
+
+      &.is-visible {
+        opacity: 1;
+      }
+
+      &:before {
+        content: '';
+        display: block;
+        width: $s+px;
+        height: $s+px;
+        box-shadow: $meal;
+      }
+
+      &:after {
+        content: '';
+        display: block;
+        width: $s+px;
+        height: $s+px;
+        box-shadow: $meal;
+        opacity: 0.2;
+        transform: translateY(-2px);
+      }
+    }
+
+    @keyframes meal {
+      0% {
+        transform: scale(1, 1)
+      }
+      50% {
+        transform: scale(-1, 1) translateX($s + px);
       }
     }
 
@@ -404,14 +478,14 @@ html {
         transform: scale(-1, 1) translateX($s + px);
       }
     }
+  }
 
-    button {
-      font-family: inherit;
-      padding: 4px 12px;
-      border: 1px solid $screen-black;
-      background-color: rgba($screen-black, 0.3);
-      border-radius: 3px;
-      cursor: pointer;
-    }
+  button {
+    font-family: inherit;
+    padding: 4px 12px;
+    border: 1px solid $screen-black;
+    background-color: rgba($screen-black, 0.3);
+    border-radius: 3px;
+    cursor: pointer;
   }
 }
