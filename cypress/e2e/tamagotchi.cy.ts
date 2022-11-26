@@ -30,13 +30,21 @@ describe('다마고찌', () => {
     cy.clock();
     cy.contains('Start').click();
 
-    const makeAndClean = () => {
-      cy.tick(ACTION_DURATION);
-      cy.contains('Clean Poop').click();
-      cy.get('.poop').should('be.hidden');
-    };
+    cy.tick(ACTION_DURATION);
+    cy.contains('Clean Poop').click();
+    cy.get('.poop').should('be.hidden');
+  });
 
-    makeAndClean();
+  it(`Poop 을 치운 후 ${
+    ACTION_DURATION / 1000
+  }초 이후 Give a Meal 버튼이 활성화 된다.`, () => {
+    cy.clock();
+    cy.contains('Start').click();
+
+    cy.tick(ACTION_DURATION);
+    cy.contains('Clean Poop').click();
+    cy.tick(ACTION_DURATION);
+    cy.contains('Give a Meal').should('be.enabled');
   });
 
   it('생성된 Poop 을 치울 때 마다 Clean Count 가 증가한다.', () => {
