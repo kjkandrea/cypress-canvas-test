@@ -47,6 +47,16 @@ describe('다마고찌', () => {
     cy.contains('Give a Meal').should('be.enabled');
   });
 
+  it('활성화 된 Give a Meal 버튼을 클릭하면 Meal 이 나타난다.', () => {
+    cy.clock();
+    cy.contains('Start').click();
+    cy.tick(ACTION_DURATION);
+    cy.contains('Clean Poop').click();
+    cy.tick(ACTION_DURATION);
+    cy.contains('Give a Meal').click();
+    cy.get('.meal').should('be.visible');
+  });
+
   it('생성된 Poop 을 치울 때 마다 Clean Count 가 증가한다.', () => {
     cy.clock();
     cy.contains('Start').click();
