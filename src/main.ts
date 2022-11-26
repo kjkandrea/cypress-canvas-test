@@ -1,8 +1,10 @@
 import './assets/scss/style.scss';
-declare module '*.mp3';
 
+declare module '*.mp3';
 import cleanPoopSound from './assets/sounds/clean-poop.mp3';
 import poopingSound from './assets/sounds/pooping.mp3';
+
+import {ACTION_DURATION} from './const';
 
 const tamagotchiTemplate = `
   <p>Clean Count : <span class="clean-count">0</span></p> 
@@ -75,7 +77,7 @@ class KareninLife {
         this.meal.classList.add('is-visible');
         this.karenin.classList.add('has-mealed');
         elem.giveMealButton.disabled = true;
-        setTimeout(() => this.eatMeal(), 4000);
+        setTimeout(() => this.eatMeal(), ACTION_DURATION);
       });
     }
   }
@@ -84,7 +86,7 @@ class KareninLife {
     if (this.karenin.classList.contains('has-mealed')) {
       sound.off.play().then(() => {
         this.hideMeal();
-        setTimeout(() => this.pooping(), 4000);
+        setTimeout(() => this.pooping(), ACTION_DURATION);
       });
     }
   }
@@ -138,7 +140,7 @@ const init = () => {
   elem.cleanPoopButton.addEventListener('click', () => keraninLife.cleanPoop());
   elem.giveMealButton.disabled = true;
   elem.cleanPoopButton.disabled = true;
-  setTimeout(() => keraninLife.pooping(), 4000);
+  setTimeout(() => keraninLife.pooping(), ACTION_DURATION);
 };
 
 elem.startButton.addEventListener('click', () => {

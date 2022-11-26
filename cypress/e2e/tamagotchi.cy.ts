@@ -1,4 +1,4 @@
-export {};
+import {ACTION_DURATION} from '../../src/const';
 
 describe('다마고찌', () => {
   beforeEach(() => {
@@ -13,10 +13,10 @@ describe('다마고찌', () => {
     cy.get('button').contains('Clean Poop');
   });
 
-  it('Start 이후 약 4초 후 Poop 이 생성된다.', () => {
+  it(`Start 이후 약 ${ACTION_DURATION / 1000}초 후 Poop 이 생성된다.`, () => {
     cy.clock();
     cy.contains('Start').click();
-    cy.tick(4050);
+    cy.tick(ACTION_DURATION);
     cy.get('.poop').should('be.visible');
     cy.get('.Karenin').should('have.class', 'has-pooped');
     cy.clock().then(clock => {
@@ -24,12 +24,14 @@ describe('다마고찌', () => {
     });
   });
 
-  it('Poop 은 4초 마다 생성되고 Clean Poop 버튼을 누르면 Poop 이 지워진다.', () => {
+  it(`Poop 은 ${
+    ACTION_DURATION / 1000
+  }초 마다 생성되고 Clean Poop 버튼을 누르면 Poop 이 지워진다.`, () => {
     cy.clock();
     cy.contains('Start').click();
 
     const makeAndClean = () => {
-      cy.tick(4050);
+      cy.tick(ACTION_DURATION);
       cy.contains('Clean Poop').click();
       cy.get('.poop').should('be.hidden');
     };
@@ -42,15 +44,24 @@ describe('다마고찌', () => {
     cy.contains('Start').click();
 
     const makeAndClean = () => {
-      cy.tick(4050);
+      cy.tick(ACTION_DURATION);
       cy.contains('Clean Poop').click();
+      cy.tick(ACTION_DURATION);
+      cy.contains('Give a Meal').click();
+      cy.tick(ACTION_DURATION);
     };
 
-    const testRange = Array.from({length: 99}, (_, i) => i + 1);
+    makeAndClean();
+    cy.contains('Clean Count : 1');
+    // TODO: 재귀 호출 가능하게 테스트 수정
+    // makeAndClean();
+    // cy.contains('Clean Count : 2');
 
-    cy.wrap(testRange).each(i => {
-      makeAndClean();
-      cy.contains(`Clean Count : ${i}`);
-    });
+    // const testRange = Array.from({length: 2}, (_, i) => i + 1);
+    //
+    // cy.wrap(testRange).each(i => {
+    //   makeAndClean();
+    //   cy.contains(`Clean Count : ${i}`);
+    // });
   });
 });
