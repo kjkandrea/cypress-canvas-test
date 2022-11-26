@@ -35,7 +35,21 @@ describe('다마고찌', () => {
     };
 
     makeAndClean();
-    makeAndClean();
-    makeAndClean();
+  });
+  it('생성된 Poop 을 치울 때 마다 clean count 가 증가한다.', () => {
+    cy.clock();
+    cy.contains('Start').click();
+
+    const makeAndClean = () => {
+      cy.tick(4050);
+      cy.contains('Clean Poop').click();
+    };
+
+    const testRange = Array.from({length: 10}, (_, i) => i + 1);
+
+    cy.wrap(testRange).each(i => {
+      makeAndClean();
+      cy.contains(`clean count : ${i}`);
+    });
   });
 });
