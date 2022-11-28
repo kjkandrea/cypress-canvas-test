@@ -66,10 +66,25 @@ describe('다마고찌', () => {
   it('Meal 이 나타나면 4초 뒤 사라지고 Poop 이 나타난다.', () => {
     cy.clock();
     cy.contains('Start').click();
+
+    // const screenshotOption = {
+    //   overwrite: true,
+    //   disableTimersAndAnimations: true
+    // }
+    //
+    // cy.get('.tamagotchi').screenshot('tamagotchi', screenshotOption)
+    // cy.get('.Karenin').screenshot('karenin', screenshotOption)
+
     cy.tick(ACTION_DURATION);
+
+    // cy.get('.poop').screenshot('poop', screenshotOption)
+
     cy.contains('Clean Poop').click();
     cy.contains('Give a Meal').click();
     cy.get('.meal').should('be.visible');
+
+    // cy.get('.meal').screenshot('meal', screenshotOption)
+
     cy.tick(ACTION_DURATION);
     cy.get('.meal').should('be.hidden');
     cy.tick(ACTION_DURATION);
