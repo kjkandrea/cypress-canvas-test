@@ -1,4 +1,6 @@
 import {ACTION_DURATION} from '../../src/const';
+// eslint-disable-next-line node/no-unpublished-import
+import 'cypress-plugin-snapshots/commands';
 
 describe('다마고찌', () => {
   beforeEach(() => {
@@ -8,14 +10,18 @@ describe('다마고찌', () => {
 
   it('Start 버튼을 클릭하면 다마고찌가 렌더링된다.', () => {
     cy.contains('Start').click();
-    // TODO: 이미지 스냅샷 테스트 해보기
-
     cy.get('[data-test-id="screen"]')
       .should('be.visible')
       .get('button')
       .contains('Give a Meal')
       .parent()
       .contains('Clean Poop');
+
+    cy.get('[data-test-id="karenin"]').toMatchImageSnapshot({
+      imageConfig: {
+        threshold: 0.001,
+      },
+    });
   });
 
   it(`Start 이후 약 ${ACTION_DURATION / 1000}초 후 Poop 이 생성된다.`, () => {
@@ -90,7 +96,7 @@ describe('다마고찌', () => {
   });
 
   it('위와 같이 Karenin 은 영원히 순환하는 시간을 산다.', () => {
-    const howMany = range(99); // if Infinity, cypress dies.. 😔
+    const howMany = range(1); // if Infinity, cypress dies.. 😔
 
     cy.clock();
     cy.contains('Start').click().tick(ACTION_DURATION);
