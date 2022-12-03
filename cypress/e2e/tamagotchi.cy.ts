@@ -1,5 +1,4 @@
 import {ACTION_DURATION} from '../../src/const';
-// eslint-disable-next-line node/no-unpublished-import
 import 'cypress-plugin-snapshots/commands';
 
 describe('다마고찌', () => {
