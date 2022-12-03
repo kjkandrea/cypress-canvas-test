@@ -8,6 +8,8 @@ describe('다마고찌', () => {
     cy.visit('http://localhost:5173');
   });
 
+  const runSnapshotTest = false;
+
   it('Start 버튼을 클릭하면 다마고찌가 렌더링된다.', () => {
     cy.contains('Start').click();
     cy.get('[data-test-id="screen"]')
@@ -17,7 +19,8 @@ describe('다마고찌', () => {
       .parent()
       .contains('Clean Poop');
 
-    cy.get('[data-test-id="karenin"]').toMatchImageSnapshot();
+    runSnapshotTest &&
+      cy.get('[data-test-id="karenin"]').toMatchImageSnapshot();
   });
 
   it(`Start 이후 약 ${ACTION_DURATION / 1000}초 후 Poop 이 생성된다.`, () => {
@@ -31,7 +34,7 @@ describe('다마고찌', () => {
       .get('[data-test-id="karenin"]')
       .should('have.class', 'has-pooped');
 
-    cy.get('[data-test-id="poop"]').toMatchImageSnapshot();
+    runSnapshotTest && cy.get('[data-test-id="poop"]').toMatchImageSnapshot();
   });
 
   it('Clean Poop 버튼을 누르면 Poop 이 지워진다.', () => {
@@ -72,7 +75,7 @@ describe('다마고찌', () => {
       .get('[data-test-id="meal"]')
       .should('be.visible');
 
-    cy.get('[data-test-id="meal"]').toMatchImageSnapshot();
+    runSnapshotTest && cy.get('[data-test-id="meal"]').toMatchImageSnapshot();
   });
 
   it('Meal 이 나타나면 4초 뒤 사라지고 Poop 이 나타난다.', () => {
