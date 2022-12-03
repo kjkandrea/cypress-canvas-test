@@ -3,19 +3,20 @@ import 'cypress-plugin-snapshots/commands';
 
 describe('다마고찌', () => {
   beforeEach(() => {
-    cy.viewport('iphone-x');
-    cy.visit('http://localhost:5173');
+    cy.viewport('iphone-x').visit('http://localhost:5173');
   });
 
   const runSnapshotTest = false;
 
   it('Start 버튼을 클릭하면 다마고찌가 렌더링된다.', () => {
-    cy.contains('Start').click();
-    cy.get('[data-test-id="screen"]')
+    cy.contains('Start')
+      .click()
+      .root()
+      .get('[data-test-id="screen"]')
       .should('be.visible')
       .get('button')
       .contains('Give a Meal')
-      .parent()
+      .get('button')
       .contains('Clean Poop');
 
     runSnapshotTest &&
@@ -23,13 +24,13 @@ describe('다마고찌', () => {
   });
 
   it(`Start 이후 약 ${ACTION_DURATION / 1000}초 후 Poop 이 생성된다.`, () => {
-    cy.clock();
-    cy.contains('Start')
+    cy.clock()
+      .root()
+      .contains('Start')
       .click()
       .tick(ACTION_DURATION)
       .get('[data-test-id="poop"]')
       .should('be.visible')
-      .parent()
       .get('[data-test-id="karenin"]')
       .should('have.class', 'has-pooped');
 
@@ -37,38 +38,57 @@ describe('다마고찌', () => {
   });
 
   it('Clean Poop 버튼을 누르면 Poop 이 지워진다.', () => {
-    cy.clock();
-    cy.contains('Start').click().tick(ACTION_DURATION);
-    cy.contains('Clean Poop')
+    cy.clock()
+      .root()
+      .contains('Start')
+      .click()
+      .tick(ACTION_DURATION)
+      .root()
+      .contains('Clean Poop')
       .click()
       .get('[data-test-id="poop"]')
       .should('be.hidden');
   });
 
   it('생성된 Poop 을 치울 때 마다 Clean Count 가 증가한다.', () => {
-    cy.clock();
-    cy.contains('Start').click().tick(ACTION_DURATION);
-    cy.contains('Clean Poop').click().parent().contains('Clean Count : 1');
+    cy.clock()
+      .root()
+      .contains('Start')
+      .click()
+      .tick(ACTION_DURATION)
+      .root()
+      .contains('Clean Poop')
+      .click()
+      .root()
+      .contains('Clean Count : 1');
   });
 
   it(`Poop 을 치운 후 ${
     ACTION_DURATION / 1000
   }초 이후 Give a Meal 버튼이 활성화 된다.`, () => {
-    cy.clock();
-    cy.contains('Start').click().tick(ACTION_DURATION);
-    cy.contains('Clean Poop')
+    cy.clock()
+      .root()
+      .contains('Start')
       .click()
-      .parent()
+      .tick(ACTION_DURATION)
+      .root()
+      .contains('Clean Poop')
+      .click()
+      .root()
       .contains('Give a Meal')
       .should('be.enabled');
   });
 
   it('활성화 된 Give a Meal 버튼을 클릭하면 Meal 이 나타난다.', () => {
-    cy.clock();
-    cy.contains('Start').click().tick(ACTION_DURATION);
-    cy.contains('Clean Poop')
+    cy.clock()
+      .root()
+      .contains('Start')
       .click()
-      .parent()
+      .tick(ACTION_DURATION)
+      .root()
+      .contains('Clean Poop')
+      .click()
+      .root()
       .contains('Give a Meal')
       .click()
       .get('[data-test-id="meal"]')
@@ -78,9 +98,13 @@ describe('다마고찌', () => {
   });
 
   it('Meal 이 나타나면 4초 뒤 사라지고 Poop 이 나타난다.', () => {
-    cy.clock();
-    cy.contains('Start').click().tick(ACTION_DURATION);
-    cy.contains('Clean Poop')
+    cy.clock()
+      .root()
+      .contains('Start')
+      .click()
+      .tick(ACTION_DURATION)
+      .root()
+      .contains('Clean Poop')
       .click()
       .parent()
       .contains('Give a Meal')
@@ -98,12 +122,15 @@ describe('다마고찌', () => {
   it('위와 같이 Karenin 은 영원히 순환하는 시간을 산다.', () => {
     const howMany = range(1); // if Infinity, cypress dies.. 😔
 
-    cy.clock();
-    cy.contains('Start').click().tick(ACTION_DURATION);
+    cy.clock().root().contains('Start').click().tick(ACTION_DURATION);
 
     const kareninLife = (i: number) => {
-      cy.contains('Clean Poop').click().parent().contains(`Clean Count : ${i}`);
-      cy.contains('Give a Meal')
+      cy.contains('Clean Poop')
+        .click()
+        .root()
+        .contains(`Clean Count : ${i}`)
+        .root()
+        .contains('Give a Meal')
         .click()
         .get('[data-test-id="meal"]')
         .should('be.visible')
