@@ -11,9 +11,9 @@ const tamagotchiTemplate = `
   <div class='tamagotchi__inner'>
     <div class='screen'>
       <div class='screen__inner' data-test-id='screen'>
-        <div class='Karenin'></div>
-        <div class='meal'></div>
-        <div class='poop'></div>
+        <div class='Karenin' data-test-id='karenin'></div>
+        <div class='meal' data-test-id='meal'></div>
+        <div class='poop' data-test-id='poop'></div>
       </div>
     </div>
   </div>

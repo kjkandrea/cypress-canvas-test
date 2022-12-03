@@ -17,8 +17,8 @@ describe('다마고찌', () => {
     cy.clock();
     cy.contains('Start').click();
     cy.tick(ACTION_DURATION);
-    cy.get('.poop').should('be.visible');
-    cy.get('.Karenin').should('have.class', 'has-pooped');
+    cy.get('[data-test-id="poop"]').should('be.visible');
+    cy.get('[data-test-id="karenin"]').should('have.class', 'has-pooped');
     cy.clock().then(clock => {
       clock.restore();
     });
@@ -32,7 +32,7 @@ describe('다마고찌', () => {
 
     cy.tick(ACTION_DURATION);
     cy.contains('Clean Poop').click();
-    cy.get('.poop').should('be.hidden');
+    cy.get('[data-test-id="poop"]').should('be.hidden');
   });
 
   it('생성된 Poop 을 치울 때 마다 Clean Count 가 증가한다.', () => {
@@ -60,7 +60,7 @@ describe('다마고찌', () => {
     cy.tick(ACTION_DURATION);
     cy.contains('Clean Poop').click();
     cy.contains('Give a Meal').click();
-    cy.get('.meal').should('be.visible');
+    cy.get('[data-test-id="meal"]').should('be.visible');
   });
 
   it('Meal 이 나타나면 4초 뒤 사라지고 Poop 이 나타난다.', () => {
@@ -69,11 +69,11 @@ describe('다마고찌', () => {
     cy.tick(ACTION_DURATION);
     cy.contains('Clean Poop').click();
     cy.contains('Give a Meal').click();
-    cy.get('.meal').should('be.visible');
+    cy.get('[data-test-id="meal"]').should('be.visible');
     cy.tick(ACTION_DURATION);
-    cy.get('.meal').should('be.hidden');
+    cy.get('[data-test-id="meal"]').should('be.hidden');
     cy.tick(ACTION_DURATION);
-    cy.get('.poop').should('be.visible');
+    cy.get('[data-test-id="poop"]').should('be.visible');
   });
 
   it('위와 같이 Karenin 은 영원히 순환하는 시간을 산다.', () => {
@@ -85,11 +85,11 @@ describe('다마고찌', () => {
       cy.contains('Clean Poop').click();
       cy.contains(`Clean Count : ${i}`);
       cy.contains('Give a Meal').click();
-      cy.get('.meal').should('be.visible');
+      cy.get('[data-test-id="meal"]').should('be.visible');
       cy.tick(ACTION_DURATION);
-      cy.get('.meal').should('be.hidden');
+      cy.get('[data-test-id="meal"]').should('be.hidden');
       cy.tick(ACTION_DURATION);
-      cy.get('.poop').should('be.visible');
+      cy.get('[data-test-id="poop"]').should('be.visible');
     };
 
     const range = function* (stop: number) {
