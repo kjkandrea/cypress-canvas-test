@@ -358,7 +358,7 @@ html {
 
       &.has-mealed:before, &.has-pooped:before,
       &.has-mealed:after, &.has-pooped:after {
-        animation: karenin-toot 1500ms steps(1) infinite !important;
+        animation: karenin-toot 1500ms steps(1) infinite;
       }
     }
 
