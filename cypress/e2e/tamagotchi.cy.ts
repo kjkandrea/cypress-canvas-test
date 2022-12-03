@@ -10,7 +10,12 @@ describe('다마고찌', () => {
     cy.contains('Start').click();
     // TODO: 이미지 스냅샷 테스트 해보기
 
-    cy.get('button').contains('Clean Poop');
+    cy.get('[data-test-id="screen"]')
+      .should('be.visible')
+      .get('button')
+      .contains('Give a Meal')
+      .parent()
+      .contains('Clean Poop');
   });
 
   it(`Start 이후 약 ${ACTION_DURATION / 1000}초 후 Poop 이 생성된다.`, () => {
@@ -97,7 +102,7 @@ describe('다마고찌', () => {
       while (++i < stop) yield i;
     };
 
-    const howMany = range(999); // if Infinity, cypress dies.. 😔
+    const howMany = range(1); // if Infinity, cypress dies.. 😔
     let looping = true;
     while (looping) {
       const {value, done} = howMany.next();
