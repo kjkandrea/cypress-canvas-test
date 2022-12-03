@@ -129,7 +129,8 @@ class KareninLife {
 
 const init = () => {
   elem.startButton.remove();
-  elem.root.append(elem.tamagotchi, elem.giveMealButton, elem.cleanPoopButton);
+  elem.tamagotchi.append(elem.giveMealButton, elem.cleanPoopButton)
+  elem.root.append(elem.tamagotchi);
 
   const Karenin = elem.root.querySelector('.Karenin') as HTMLDivElement;
   const poop = elem.root.querySelector('.poop') as HTMLDivElement;
