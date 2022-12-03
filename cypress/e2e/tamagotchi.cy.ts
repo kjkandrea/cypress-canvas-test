@@ -17,11 +17,7 @@ describe('다마고찌', () => {
       .parent()
       .contains('Clean Poop');
 
-    cy.get('[data-test-id="karenin"]').toMatchImageSnapshot({
-      imageConfig: {
-        threshold: 0.001,
-      },
-    });
+    cy.get('[data-test-id="karenin"]').toMatchImageSnapshot();
   });
 
   it(`Start 이후 약 ${ACTION_DURATION / 1000}초 후 Poop 이 생성된다.`, () => {
@@ -34,11 +30,11 @@ describe('다마고찌', () => {
       .parent()
       .get('[data-test-id="karenin"]')
       .should('have.class', 'has-pooped');
+
+    cy.get('[data-test-id="poop"]').toMatchImageSnapshot();
   });
 
-  it(`Poop 은 ${
-    ACTION_DURATION / 1000
-  }초 마다 생성되고 Clean Poop 버튼을 누르면 Poop 이 지워진다.`, () => {
+  it('Clean Poop 버튼을 누르면 Poop 이 지워진다.', () => {
     cy.clock();
     cy.contains('Start').click().tick(ACTION_DURATION);
     cy.contains('Clean Poop')
@@ -75,6 +71,8 @@ describe('다마고찌', () => {
       .click()
       .get('[data-test-id="meal"]')
       .should('be.visible');
+
+    cy.get('[data-test-id="meal"]').toMatchImageSnapshot();
   });
 
   it('Meal 이 나타나면 4초 뒤 사라지고 Poop 이 나타난다.', () => {
