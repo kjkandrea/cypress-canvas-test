@@ -1,5 +1,4 @@
 import {ACTION_DURATION} from '../../src/const';
-import 'cypress-plugin-snapshots/commands';
 
 describe('다마고찌', () => {
   beforeEach(() => {
@@ -12,7 +11,7 @@ describe('다마고찌', () => {
     cy.contains('Start')
       .click()
       .root()
-      .get('[data-test-id="screen"]')
+      .getByTestId('screen')
       .should('be.visible')
       .get('button')
       .contains('Give a Meal')
@@ -20,7 +19,7 @@ describe('다마고찌', () => {
       .contains('Clean Poop');
 
     runSnapshotTest &&
-      cy.get('[data-test-id="karenin"]').toMatchImageSnapshot();
+      cy.getByTestId('karenin').toMatchImageSnapshot();
   });
 
   it(`Start 이후 약 ${ACTION_DURATION / 1000}초 후 Poop 이 생성된다.`, () => {
@@ -29,9 +28,9 @@ describe('다마고찌', () => {
       .contains('Start')
       .click()
       .tick(ACTION_DURATION)
-      .get('[data-test-id="poop"]')
+      .getByTestId('poop')
       .should('be.visible')
-      .get('[data-test-id="karenin"]')
+      .getByTestId('karenin')
       .should('have.class', 'has-pooped');
 
     runSnapshotTest && cy.get('[data-test-id="poop"]').toMatchImageSnapshot();
@@ -46,7 +45,7 @@ describe('다마고찌', () => {
       .root()
       .contains('Clean Poop')
       .click()
-      .get('[data-test-id="poop"]')
+      .getByTestId('poop')
       .should('be.hidden');
   });
 
@@ -91,7 +90,7 @@ describe('다마고찌', () => {
       .root()
       .contains('Give a Meal')
       .click()
-      .get('[data-test-id="meal"]')
+      .getByTestId('meal')
       .should('be.visible');
 
     runSnapshotTest && cy.get('[data-test-id="meal"]').toMatchImageSnapshot();
@@ -109,13 +108,13 @@ describe('다마고찌', () => {
       .parent()
       .contains('Give a Meal')
       .click()
-      .get('[data-test-id="meal"]')
+      .getByTestId('meal')
       .should('be.visible')
       .tick(ACTION_DURATION)
-      .get('[data-test-id="meal"]')
+      .getByTestId('meal')
       .should('be.hidden')
       .tick(ACTION_DURATION)
-      .get('[data-test-id="poop"]')
+      .getByTestId('poop')
       .should('be.visible');
   });
 
@@ -132,13 +131,13 @@ describe('다마고찌', () => {
         .root()
         .contains('Give a Meal')
         .click()
-        .get('[data-test-id="meal"]')
+        .getByTestId('meal')
         .should('be.visible')
         .tick(ACTION_DURATION)
-        .get('[data-test-id="meal"]')
+        .getByTestId('meal')
         .should('be.hidden')
         .tick(ACTION_DURATION)
-        .get('[data-test-id="poop"]')
+        .getByTestId('poop')
         .should('be.visible');
     };
 
@@ -153,7 +152,8 @@ describe('다마고찌', () => {
         looping = false;
         break;
       }
-      kareninLife(value + 1);
+
+      if (typeof value === 'number') kareninLife(value + 1);
     }
   });
 });
