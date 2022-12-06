@@ -65,7 +65,7 @@ describe('다마고찌', () => {
       .cleanPoop()
       .contains('Give a Meal')
       .click()
-      .getByTestId('meal')
+      .getMeal()
       .should('be.visible');
 
     runSnapshotTest && cy.get('[data-test-id="meal"]').toMatchImageSnapshot();
@@ -76,10 +76,10 @@ describe('다마고찌', () => {
       .cleanPoop()
       .giveMeal()
       .tick(ACTION_DURATION)
-      .getByTestId('meal')
+      .getMeal()
       .should('be.hidden')
       .tick(ACTION_DURATION)
-      .getByTestId('poop')
+      .getPoop()
       .should('be.visible');
   });
 
@@ -92,13 +92,13 @@ describe('다마고찌', () => {
       cy.cleanPoop()
         .contains(`Clean Count : ${i}`)
         .giveMeal()
-        .getByTestId('meal')
+        .getMeal()
         .should('be.visible')
         .tick(ACTION_DURATION)
-        .getByTestId('meal')
+        .getMeal()
         .should('be.hidden')
         .tick(ACTION_DURATION)
-        .getByTestId('poop')
+        .getPoop()
         .should('be.visible');
     };
 

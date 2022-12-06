@@ -16,6 +16,16 @@ Cypress.Commands.add('tamagotchiStart', () => {
     .click()
 })
 
+Cypress.Commands.add('getPoop', () => {
+  return cy
+    .getByTestId('poop')
+})
+
+Cypress.Commands.add('getMeal', () => {
+  return cy
+    .getByTestId('meal')
+})
+
 Cypress.Commands.add('cleanPoop', () => {
   return cy
     .clock()

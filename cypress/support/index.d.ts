@@ -8,6 +8,8 @@ declare namespace Cypress {
      */
     getByTestId(testId: string): Chainable<JQuery<HTMLHtmlElement>>
     tamagotchiStart(): Chainable<JQuery<HTMLHtmlElement>>
+    getPoop(): Chainable<JQuery<HTMLHtmlElement>>
+    getMeal(): Chainable<JQuery<HTMLHtmlElement>>
     cleanPoop(): Chainable<JQuery<HTMLHtmlElement>>
     giveMeal(): Chainable<JQuery<HTMLHtmlElement>>
   }
