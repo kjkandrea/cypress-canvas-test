@@ -100,20 +100,6 @@ describe('다마고찌', () => {
     it('위와 같이 Karenin 은 영원히 순환하는 시간을 산다.', () => {
       const howMany = range(10); // if Infinity, cypress dies.. 😔
 
-      const kareninLife = (i: number) => {
-        cy.cleanPoop()
-          .contains(`Clean Count : ${i}`)
-          .giveMeal()
-          .getMeal()
-          .should('be.visible')
-          .tick(ACTION_DURATION)
-          .getMeal()
-          .should('be.hidden')
-          .tick(ACTION_DURATION)
-          .getPoop()
-          .should('be.visible');
-      };
-
       function* range(stop: number) {
         let i = -1;
         while (++i < stop) yield i;
@@ -126,7 +112,7 @@ describe('다마고찌', () => {
           break;
         }
 
-        if (typeof value === 'number') kareninLife(value + 1);
+        if (typeof value === 'number') cy.kareninCycle(value + 1);
       }
     });
   });

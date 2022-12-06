@@ -52,3 +52,18 @@ Cypress.Commands.add('giveMeal', () => {
     .click()
 })
 
+Cypress.Commands.add('kareninCycle', (i: number) => {
+  return cy
+    .cleanPoop()
+    .contains(`Clean Count : ${i}`)
+    .giveMeal()
+    .getMeal()
+    .should('be.visible')
+    .tick(ACTION_DURATION)
+    .getMeal()
+    .should('be.hidden')
+    .tick(ACTION_DURATION)
+    .getPoop()
+    .should('be.visible');
+})
+

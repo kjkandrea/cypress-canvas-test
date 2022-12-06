@@ -12,5 +12,6 @@ declare namespace Cypress {
     getMeal(): Chainable<JQuery<HTMLHtmlElement>>
     cleanPoop(): Chainable<JQuery<HTMLHtmlElement>>
     giveMeal(): Chainable<JQuery<HTMLHtmlElement>>
+    kareninCycle(i: number): Chainable<JQuery<HTMLHtmlElement>>
   }
 }
