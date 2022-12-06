@@ -74,10 +74,7 @@ describe('다마고찌', () => {
   it('Meal 이 나타나면 4초 뒤 사라지고 Poop 이 나타난다.', () => {
     cy.tamagotchiStart()
       .cleanPoop()
-      .contains('Give a Meal')
-      .click()
-      .getByTestId('meal')
-      .should('be.visible')
+      .giveMeal()
       .tick(ACTION_DURATION)
       .getByTestId('meal')
       .should('be.hidden')
@@ -94,9 +91,7 @@ describe('다마고찌', () => {
     const kareninLife = (i: number) => {
       cy.cleanPoop()
         .contains(`Clean Count : ${i}`)
-        .root()
-        .contains('Give a Meal')
-        .click()
+        .giveMeal()
         .getByTestId('meal')
         .should('be.visible')
         .tick(ACTION_DURATION)

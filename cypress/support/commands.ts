@@ -25,3 +25,20 @@ Cypress.Commands.add('cleanPoop', () => {
     .click()
     .root()
 })
+
+Cypress.Commands.add('cleanPoop', () => {
+  return cy
+    .clock()
+    .tick(ACTION_DURATION)
+    .root()
+    .contains('Clean Poop')
+    .click()
+    .root()
+})
+
+Cypress.Commands.add('giveMeal', () => {
+  return cy
+    .contains('Give a Meal')
+    .click()
+})
+
