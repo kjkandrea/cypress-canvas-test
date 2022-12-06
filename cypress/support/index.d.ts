@@ -6,6 +6,7 @@ declare namespace Cypress {
      * Custom command to select DOM element by data-test-id attribute.
      * @example cy.getByTestId('poop')
      */
-    getByTestId(testId: string): Chainable<JQuery<Element>>
+    getByTestId(testId: string): Chainable<JQuery<HTMLHtmlElement>>
+    tamagotchiStart(): Chainable<JQuery<HTMLHtmlElement>>
   }
 }
