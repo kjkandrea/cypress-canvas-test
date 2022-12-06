@@ -11,7 +11,7 @@ describe('다마고찌', () => {
     cy
       .contains('Start')
       .click()
-      .getByTestId('screen')
+      .getScreen()
       .should('be.visible')
       .get('button')
       .contains('Give a Meal')
@@ -19,29 +19,26 @@ describe('다마고찌', () => {
       .contains('Clean Poop');
 
     runSnapshotTest &&
-      cy.getByTestId('karenin').toMatchImageSnapshot();
+      cy.getKarenin().toMatchImageSnapshot();
   });
 
   describe(`Start 이후 약 ${ACTION_DURATION / 1000}초 후`, () => {
     beforeEach(() => {
-      cy.tamagotchiStart().tick(ACTION_DURATION);
+      cy.tamagotchiStart().nextTick()
     });
 
     it(`Poop 이 생성된다.`, () => {
       cy.getPoop()
-        .should('be.visible')
-        .getByTestId('karenin')
-        .should('have.class', 'has-pooped');
+        .hasPooped(true)
 
-      runSnapshotTest && cy.get('[data-test-id="poop"]').toMatchImageSnapshot();
+      runSnapshotTest && cy.getPoop().toMatchImageSnapshot();
     });
 
     it('Clean Poop 버튼을 누르면 Poop 이 지워진다.', () => {
       cy
         .contains('Clean Poop')
         .click()
-        .getByTestId('poop')
-        .should('be.hidden');
+        .hasPooped(false)
     });
 
     it('생성된 Poop 을 치울 때 마다 Clean Count 가 증가한다.', () => {
@@ -75,20 +72,19 @@ describe('다마고찌', () => {
     it('Meal 이 나타나면 4초 뒤 karenin 이 먹는다.', () => {
       cy
         .giveMeal()
-        .tick(ACTION_DURATION)
-        .getMeal()
-        .should('be.hidden')
+        .nextTick()
+        .hasEatMeal(true)
     });
 
     it('Meal 을 먹으면 Poop 이 나타난다.', () => {
       cy
         .giveMeal()
-        .tick(ACTION_DURATION)
+        .nextTick()
         .getMeal()
-        .should('be.hidden')
-        .tick(ACTION_DURATION)
+        .hasEatMeal(true)
+        .nextTick()
         .getPoop()
-        .should('be.visible');
+        .hasPooped(true)
     });
   });
 
@@ -98,22 +94,11 @@ describe('다마고찌', () => {
     });
 
     it('위와 같이 Karenin 은 영원히 순환하는 시간을 산다.', () => {
-      const howMany = range(10); // if Infinity, cypress dies.. 😔
+      cy.recursionLoop((times) => {
+        cy.kareninCycle(times);
+        return 10 > times // if Infinity, cypress dies.. 😔
+      })
 
-      function* range(stop: number) {
-        let i = -1;
-        while (++i < stop) yield i;
-      }
-      let looping = true;
-      while (looping) {
-        const {value, done} = howMany.next();
-        if (done) {
-          looping = false;
-          break;
-        }
-
-        if (typeof value === 'number') cy.kareninCycle(value + 1);
-      }
     });
   });
 });
