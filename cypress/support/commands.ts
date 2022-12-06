@@ -1,3 +1,5 @@
+import {ACTION_DURATION} from '../../src/const';
+
 Cypress.Commands.add('getByTestId', (testId) => {
   return cy.get(`[data-test-id=${testId}]`)
 })
@@ -8,7 +10,18 @@ Cypress.Commands.add('getByTestId', (testId) => {
 
 Cypress.Commands.add('tamagotchiStart', () => {
   return cy
+    .clock()
     .root()
     .contains('Start')
     .click()
+})
+
+Cypress.Commands.add('cleanPoop', () => {
+  return cy
+    .clock()
+    .tick(ACTION_DURATION)
+    .root()
+    .contains('Clean Poop')
+    .click()
+    .root()
 })
