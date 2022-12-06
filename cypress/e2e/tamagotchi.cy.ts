@@ -66,7 +66,7 @@ describe('다마고찌', () => {
         .getMeal()
         .should('be.visible');
 
-      runSnapshotTest && cy.get('[data-test-id="meal"]').toMatchImageSnapshot();
+      runSnapshotTest && cy.getMeal().toMatchImageSnapshot();
     });
 
     it('Meal 이 나타나면 4초 뒤 karenin 이 먹는다.', () => {
